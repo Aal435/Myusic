@@ -58,3 +58,6 @@ The compiled executable will be located in `src-tauri/target/release/myusic.exe`
   - Window Size & Position
   - Idle Opacity (fades out when you aren't interacting with it)
   - Toggle Album Art & Controls visibility
+    
+- **Lyrics**:
+  - Adding Romaji option for Japanesse songs
