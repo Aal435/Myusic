@@ -1,0 +1,351 @@
+/* ===== CSS Custom Properties ===== */
+:root {
+  --text-color: #ffffff;
+  --control-color: #ffffff;
+  --font-size: 18px;
+  --idle-opacity: 1.0;
+  --bg-color: transparent;
+  --album-size: 70px;
+  --transition-speed: 0.5s;
+}
+
+/* ===== Reset & Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: transparent;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-color);
+  user-select: none;
+  -webkit-user-select: none;
+  width: 100%;
+  height: 100%;
+}
+/* ===== UNIFIED LAYOUT ===== */
+.horizontal-layout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 24px;
+  opacity: 1;
+}
+
+#album-container {
+  flex-shrink: 0;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.lyrics-window-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.01); /* Invisible but catches clicks */
+}
+
+
+
+
+
+.bottom-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  /* Top and bottom fade mask for scrolling lyrics */
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.fadeable {
+  transition: opacity var(--transition-speed) ease;
+}
+
+.horizontal-layout.idle .fadeable,
+.lyrics-window-container.idle .fadeable {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.lyrics-container {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scroll-behavior: smooth;
+  padding: 40px 0; /* padding for centering */
+}
+.lyrics-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.lyrics-text {
+  font-family: 'Aileron', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: pre-line;
+  width: 100%;
+  text-align: center;
+  line-height: 1.6;
+}
+
+
+
+/* Scrolling text for long titles */
+.scroll-text {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.scroll-text.scrolling {
+  animation: scroll-left var(--scroll-duration, 10s) linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 2em)); }
+}
+
+/* Album Art */
+.album-art-wrapper {
+  position: relative;
+  width: var(--album-size);
+  height: var(--album-size);
+  border-radius: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.album-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.album-art.hidden {
+  display: none;
+}
+
+.album-art-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.album-art-placeholder.hidden {
+  display: none;
+}
+
+/* Track Info */
+.track-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.song-title-active {
+  font-family: 'Aileron', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: calc(var(--font-size) * 1.5);
+  font-weight: 100;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 300px;
+  color: var(--text-color);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: var(--control-color);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.control-btn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.play-btn {
+  opacity: 1;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ===== CONTEXT MENU ===== */
+.context-menu {
+  position: fixed;
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  min-width: 220px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.context-menu.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+  display: block !important;
+}
+
+.menu-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.menu-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.color-input {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+}
+
+.color-input::-webkit-color-swatch-wrapper {
+  padding: 2px;
+}
+
+.color-input::-webkit-color-swatch {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.range-input {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.range-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  min-width: 32px;
+  text-align: right;
+}
+
+.menu-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 6px 0;
+}
+
+.menu-btn {
+  display: block;
+  width: 100%;
+  padding: 8px 8px;
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.menu-btn:hover {
+  background: rgba(255, 107, 107, 0.1);
+}
+
+/* ===== LYRICS ===== */
+.lyrics-container {
+  padding: 10px 0;
+  text-align: center;
+}
+
+
+.lyric-line {
+  color: rgba(255, 255, 255, 0.25);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: 4px 20px;
+  filter: blur(1px);
+  transform-origin: center;
+}
+
+.lyric-line.active {
+  color: rgba(255, 255, 255, 1);
+  font-size: 24px;
+  filter: blur(0px);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}

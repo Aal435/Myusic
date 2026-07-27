@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AppMus Lyrics</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="lyrics-window-container fadeable" id="lyrics-window" data-tauri-drag-region>
+    <div class="bottom-section" data-tauri-drag-region>
+      <div class="lyrics-container" id="lyrics-container" data-tauri-drag-region>
+        <div class="lyrics-text" id="lyrics-text" data-tauri-drag-region>No song playing</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onerror = function(msg, url, line, col, error) {
+      document.getElementById('lyrics-text').textContent = "ERR: " + msg;
+    };
+    const { invoke } = window.__TAURI__.core;
+    const { listen } = window.__TAURI__.event;
+  </script>
+  <script src="lyrics.js"></script>
+</body>
+</html>

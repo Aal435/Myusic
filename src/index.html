@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AppMus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app-container" class="horizontal-layout" data-tauri-drag-region>
+    
+    <!-- LEFT: Album Art -->
+    <div id="album-container" class="fadeable album-art-wrapper" data-tauri-drag-region>
+      <img id="album-art" src="" alt="Album Art" class="album-art hidden" data-tauri-drag-region>
+      <div class="album-art-placeholder" id="album-placeholder" data-tauri-drag-region>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="12" r="3"/>
+          <line x1="12" y1="2" x2="12" y2="5"/>
+          <line x1="12" y1="19" x2="12" y2="22"/>
+        </svg>
+      </div>
+    </div>
+    
+    <!-- RIGHT: Info and Controls -->
+    <div class="info-container" data-tauri-drag-region>
+      <div class="song-title-active fadeable" id="active-title" data-tauri-drag-region>
+        <span class="scroll-text" id="title-text" data-tauri-drag-region>Song Name</span>
+      </div>
+      
+      <div class="controls fadeable" id="controls">
+        <button class="control-btn" id="btn-shuffle" title="Shuffle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
+          </svg>
+        </button>
+        <button class="control-btn" id="btn-prev" title="Previous">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+          </svg>
+        </button>
+        <button class="control-btn play-btn" id="btn-play" title="Play/Pause">
+          <svg id="icon-play" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <svg id="icon-pause" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="hidden">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+        </button>
+        <button class="control-btn" id="btn-next" title="Next">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+          </svg>
+        </button>
+        <button class="control-btn" id="btn-repeat" title="Repeat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT-CLICK CONTEXT MENU -->
+  <div id="context-menu" class="context-menu hidden">
+    <div class="menu-group">
+      <div class="menu-label">Text Color</div>
+      <input type="color" id="setting-text-color" value="#ffffff" class="color-input">
+    </div>
+    <div class="menu-group">
+      <div class="menu-label">Font Size</div>
+      <input type="range" id="setting-font-size" min="12" max="48" value="24" class="range-input">
+      <span id="font-size-label" class="range-label">24px</span>
+    </div>
+    <div class="menu-group">
+      <div class="menu-label">Opacity</div>
+      <input type="range" id="setting-opacity" min="10" max="100" value="100" class="range-input">
+      <span id="opacity-label" class="range-label">100%</span>
+    </div>
+    <div class="menu-group">
+      <div class="menu-label">Active Duration</div>
+      <input type="range" id="setting-duration" min="2" max="15" value="5" class="range-input">
+      <span id="duration-label" class="range-label">5s</span>
+    </div>
+    <div class="menu-divider"></div>
+    <button class="menu-btn" id="menu-quit">Quit AppMus</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

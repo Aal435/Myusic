@@ -1,0 +1,46 @@
+{
+  "productName": "Myusic",
+  "version": "1.0.0",
+  "identifier": "com.myusic.overlay",
+  "build": {
+    "beforeDevCommand": "",
+    "frontendDist": "../src"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Myusic",
+        "width": 500,
+        "height": 160,
+        "x": 100,
+        "y": 100,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "resizable": false,
+        "skipTaskbar": true,
+        "shadow": false
+      },
+      {
+        "label": "lyrics",
+        "title": "Myusic Lyrics",
+        "url": "lyrics.html",
+        "width": 700,
+        "height": 140,
+        "x": 650,
+        "y": 100,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "resizable": false,
+        "skipTaskbar": true,
+        "shadow": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  }
+}
