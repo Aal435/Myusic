@@ -7,12 +7,6 @@
 - **Fully Transparent Overlay**: Runs silently on your desktop, blending perfectly with your wallpaper and other applications.
 - **Real-Time Media Sync**: Instantly detects and displays what's currently playing, syncing lyrics and album art.
 - **Media Controls**: Play, pause, skip, go back, toggle shuffle, and repeat straight from the overlay.
-- **Customizable**: Access the built-in settings menu to tweak:
-  - Text, Control, and Background Colors (with transparency support)
-  - Font Size (for lyrics and song titles)
-  - Window Size & Position
-  - Idle Opacity (fades out when you aren't interacting with it)
-  - Toggle Album Art & Controls visibility
 - **System Tray Integration**: Quietly lives in your taskbar tray. Right-click to easily exit the app.
 - **Incredibly Lightweight**: Built with Rust and Tauri, ensuring minimal memory and CPU usage compared to Electron-based alternatives.
 
@@ -35,7 +29,7 @@ Myusic is built with **Tauri v2**, **Rust**, **React**, and **TypeScript**.
 1. Clone the repository:
    ```bash
    git clone <your-repo-url>
-   cd AppMus
+   cd Myusic
    ```
 2. Install dependencies:
    ```bash
@@ -55,3 +49,12 @@ The compiled executable will be located in `src-tauri/target/release/myusic.exe`
 
 ---
 *Enjoy your uninterrupted, beautiful music experience with Myusic!*
+
+## Incoming Features ✨
+
+- **Customizable**: Access the built-in settings menu to tweak:
+  - Text, Control, and Background Colors (with transparency support)
+  - Font Size (for lyrics and song titles)
+  - Window Size & Position
+  - Idle Opacity (fades out when you aren't interacting with it)
+  - Toggle Album Art & Controls visibility
